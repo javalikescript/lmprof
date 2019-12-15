@@ -5,6 +5,11 @@
 #include <lualib.h>
 #include <stdint.h>
 
+#if (LUA_VERSION_NUM >= 504)
+#define LUA_QL(x)	"'" x "'"
+#define LUA_QS		LUA_QL("%s")
+#endif
+
 static int findfield (lua_State *L, int objidx, int level) {
   if (level == 0 || !lua_istable(L, -1))
     return 0;  /* not found */
